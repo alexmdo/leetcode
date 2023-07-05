@@ -7,9 +7,29 @@ import java.util.TreeSet;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(new Main().intersect(new int[]{1, 2, 2, 1}, new int[]{2, 2})));  // [2, 2]
-        System.out.println(Arrays.toString(new Main().intersect(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4}))); // [4, 9]
-        System.out.println(Arrays.toString(new Main().intersect(new int[]{3, 1, 2}, new int[]{1, 1}))); // [1]
+        System.out.println(Arrays.toString(new Main().twoSum(new int[]{2, 7, 11, 15}, 9)));  // [0,1]
+        System.out.println(Arrays.toString(new Main().twoSum(new int[]{3, 2, 4}, 6)));  // [1,2]
+        System.out.println(Arrays.toString(new Main().twoSum(new int[]{3, 3}, 6)));  // [0,1]
+    }
+
+    public int[] twoSum(int[] nums, int target) {
+        var resp = new int[2];
+        for (var i = 0; i < nums.length; i++) {
+            var outerValue = nums[i];
+            for (var j = 0; j < nums.length; j++) {
+                var innerValue = nums[j];
+                if (i == j) {
+                    continue;
+                }
+
+                if (outerValue + innerValue == target) {
+                    resp[0] = i;
+                    resp[1] = j;
+                }
+            }
+        }
+
+        return resp;
     }
 
     /*
