@@ -7,11 +7,35 @@ import java.util.TreeSet;
 
 public class Main {
     public static void main(String[] args) {
+        char[] input = {'h', 'e', 'l', 'l', 'o'};
+        new Main().reverseString(input);
+        System.out.println(Arrays.toString(input)); // ["o","l","l","e","h"]
+
+        input = new char[]{'H','a','n','n','a','h'};
+        new Main().reverseString(input);
+        System.out.println(Arrays.toString(input)); // ["h","a","n","n","a","H"]
+    }
+
+    public void reverseString(char[] s) {
+        int j = s.length - 1;
+        for (int i = 0; i < s.length; i++) {
+            if (i >= j) {
+                break;
+            }
+
+            char aux = s[i];
+            s[i] = s[j];
+            s[j] = aux;
+
+            j--;
+        }
+    }
+
+    /*
         System.out.println(Arrays.toString(new Main().twoSum(new int[]{2, 7, 11, 15}, 9)));  // [0,1]
         System.out.println(Arrays.toString(new Main().twoSum(new int[]{3, 2, 4}, 6)));  // [1,2]
         System.out.println(Arrays.toString(new Main().twoSum(new int[]{3, 3}, 6)));  // [0,1]
-    }
-
+     */
     public int[] twoSum(int[] nums, int target) {
         var resp = new int[2];
         for (var i = 0; i < nums.length; i++) {
