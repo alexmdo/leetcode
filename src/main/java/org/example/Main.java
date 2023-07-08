@@ -7,12 +7,52 @@ import java.util.TreeSet;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println(new Main().isAnagram("anagram", "nagaram")); // true
+        System.out.println(new Main().isAnagram("rat", "car")); // false
+    }
+
+    public boolean isAnagram(String s, String t) {
+        if (s.length() < t.length()) {
+            return isAnagram(t, s);
+        }
+
+        char[] origin = s.toCharArray();
+        for (int i = 0; i < origin.length; i++) {
+            if (!t.contains(origin[i] + "")) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /*
+        System.out.println(new Main().firstUniqChar("leetcode")); // 0
+        System.out.println(new Main().firstUniqChar("loveleetcode")); // 2
+        System.out.println(new Main().firstUniqChar("aabb")); // -1
+     */
+    public int firstUniqChar(String s) {
+        HashMap<Character, Integer> hash = new HashMap<>();
+        char[] charArray = s.toCharArray();
+        for (int i = 0; i < charArray.length; i++) {
+            hash.put(charArray[i], hash.getOrDefault(charArray[i], 0) + 1);
+        }
+
+        for (int i = 0; i < charArray.length; i++) {
+            if (hash.get(charArray[i]) == 1) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    /*
         System.out.println(new Main().reverse(123)); // 321
         System.out.println(new Main().reverse(-123)); // -321
         System.out.println(new Main().reverse(120)); // 21
         System.out.println(new Main().reverse(1534236469)); // 0
-    }
-
+     */
     public int reverse(int x) {
         int rev = 0;
 
