@@ -7,6 +7,34 @@ import java.util.TreeSet;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println(new Main().reverse(123)); // 321
+        System.out.println(new Main().reverse(-123)); // -321
+        System.out.println(new Main().reverse(120)); // 21
+        System.out.println(new Main().reverse(1534236469)); // 0
+    }
+
+    public int reverse(int x) {
+        int rev = 0;
+
+        while (x != 0) {
+            int pop = x % 10;
+            x /= 10;
+
+            if (rev > Integer.MAX_VALUE / 10 || (rev == Integer.MAX_VALUE / 10 && pop > 7)) {
+                return 0;
+            }
+
+            if (rev < Integer.MIN_VALUE / 10 || (rev == Integer.MIN_VALUE / 10 && pop < -8)) {
+                return 0;
+            }
+
+            rev = rev * 10 + pop;
+        }
+
+        return rev;
+    }
+
+    /*
         char[] input = {'h', 'e', 'l', 'l', 'o'};
         new Main().reverseString(input);
         System.out.println(Arrays.toString(input)); // ["o","l","l","e","h"]
@@ -14,8 +42,7 @@ public class Main {
         input = new char[]{'H','a','n','n','a','h'};
         new Main().reverseString(input);
         System.out.println(Arrays.toString(input)); // ["h","a","n","n","a","H"]
-    }
-
+     */
     public void reverseString(char[] s) {
         int j = s.length - 1;
         for (int i = 0; i < s.length; i++) {
