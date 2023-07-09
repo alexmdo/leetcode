@@ -12,18 +12,13 @@ public class Main {
     }
 
     public boolean isAnagram(String s, String t) {
-        if (s.length() < t.length()) {
-            return isAnagram(t, s);
-        }
-
         char[] origin = s.toCharArray();
-        for (int i = 0; i < origin.length; i++) {
-            if (!t.contains(origin[i] + "")) {
-                return false;
-            }
-        }
+        char[] target = t.toCharArray();
 
-        return true;
+        Arrays.sort(origin);
+        Arrays.sort(target);
+
+        return new String(origin).equals(new String(target));
     }
 
     /*
