@@ -7,10 +7,32 @@ import java.util.TreeSet;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(new Main().isAnagram("anagram", "nagaram")); // true
-        System.out.println(new Main().isAnagram("rat", "car")); // false
+        System.out.println(new Main().isPalindrome("A man, a plan, a canal: Panama")); // true
+        System.out.println(new Main().isPalindrome("race a car")); // false
+        System.out.println(new Main().isPalindrome(" ")); // true
     }
 
+    public boolean isPalindrome(String s) {
+        if (s.trim() == "") {
+            return true;
+        }
+
+        StringBuilder strFiltered = new StringBuilder();
+        char[] originalStrArray = s.toCharArray();
+        for (int i = 0; i < originalStrArray.length; i++) {
+            if (Character.isLetterOrDigit(originalStrArray[i])) {
+                strFiltered.append(originalStrArray[i]);
+            }
+        }
+
+        StringBuilder strReverse = new StringBuilder(strFiltered).reverse();
+        return strFiltered.toString().toLowerCase().equals(strReverse.toString().toLowerCase());
+    }
+
+    /*
+        System.out.println(new Main().isAnagram("anagram", "nagaram")); // true
+        System.out.println(new Main().isAnagram("rat", "car")); // false
+     */
     public boolean isAnagram(String s, String t) {
         char[] origin = s.toCharArray();
         char[] target = t.toCharArray();
