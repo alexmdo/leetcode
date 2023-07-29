@@ -1,17 +1,111 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println(new Main().strStr("sadbutsad", "sad")); // 0
+        System.out.println(new Main().strStr("leetcode", "leeto")); // -1
+        System.out.println(new Main().strStr("aaa", "aaaa")); // -1
+        System.out.println(new Main().strStr("mississippi", "issipi")); // -1
+    }
+
+    public int strStr(String haystack, String needle) {
+        if (needle.length() > haystack.length()) {
+            return -1;
+        }
+
+        char[] haystackArray = haystack.toCharArray();
+        char[] needleArray = needle.toCharArray();
+        int hayIndex = 0;
+
+
+        while (hayIndex < haystackArray.length) {
+            int auxIndex = hayIndex;
+            int hit = 0;
+            for (int i = 0; i < needleArray.length; i++) {
+                if (auxIndex < haystackArray.length && haystackArray[auxIndex] == needleArray[i]) {
+                    hit++;
+                    auxIndex++;
+                } else {
+                    break;
+                }
+            }
+            if (hit == needle.length()) {
+                return hayIndex;
+            }
+
+            hayIndex++;
+        }
+
+
+        return -1;
+    }
+
+    /*
+        System.out.println(new Main().myAtoi("42")); // 42
+        System.out.println(new Main().myAtoi("   -42")); // -42
+        System.out.println(new Main().myAtoi("4193 with words")); // 4193
+        System.out.println(new Main().myAtoi("words and 987")); // 0
+        System.out.println(new Main().myAtoi("-91283472332")); // 0
+        System.out.println(new Main().myAtoi("+-12")); // 0
+        System.out.println(new Main().myAtoi("2147483646")); // 2147483646
+     */
+    public int myAtoi(String s) {
+        char[] chars = new char[s.length()];
+        int aux = 0;
+        String trimmedStr = s.trim();
+        char signNum = '+';
+        for (int i = 0; i < trimmedStr.length(); i++) {
+            char c = trimmedStr.charAt(i);
+            if (c == '+' || c == '-') {
+                if (i > 0) {
+                    break;
+                }
+
+                signNum = c;
+                chars[aux] = c;
+                aux++;
+                continue;
+            }
+
+            if (c == ' ' || !Character.isDigit(c)) {
+                break;
+            }
+
+            if (Character.isDigit(c)) {
+                chars[aux] = c;
+                aux++;
+            }
+        }
+
+        int result = 0;
+        for (int i = 0; i < chars.length; i++) {
+            if (!Character.isDigit(chars[i])) {
+                continue;
+            }
+
+            result *= 10;
+            result += Character.getNumericValue(chars[i]);
+
+            if ((result > Integer.MAX_VALUE / 10) ||
+                    (result == Integer.MAX_VALUE / 10 && chars[i] > Integer.MAX_VALUE % 10)) {
+                return signNum == '+' ? Integer.MAX_VALUE : Integer.MIN_VALUE;
+            }
+        }
+
+        if (signNum == '-') {
+            result *= -1;
+        }
+
+        return result;
+    }
+
+    /*
         System.out.println(new Main().isPalindrome("A man, a plan, a canal: Panama")); // true
         System.out.println(new Main().isPalindrome("race a car")); // false
         System.out.println(new Main().isPalindrome(" ")); // true
-    }
-
+     */
     public boolean isPalindrome(String s) {
         if (s.trim() == "") {
             return true;
